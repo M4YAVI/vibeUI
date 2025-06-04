@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Ultra‑Cool Vehicle Dashboard</title>
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Base page styles */
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    .gauge-ring {
+      stroke-dasharray: 314;
+      transform-origin: center;
+      transform: rotate(-90deg);
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    /* Animated gradient border wrapper */
+    .gradient-border {
+      position: relative;
+      border-radius: 1.5rem;
+      padding: 2px; /* for the outer “glow” */
+      background: linear-gradient(
+        45deg,
+        #7f00ff,
+        #e100ff,
+        #00ffff,
+        #2dd4bf,
+        #5f72be
+      );
+      background-size: 400% 400%;
+      animation: gradient‑move 8s ease infinite;
+    }
+    .gradient-border > .inner-card {
+      /* undo the background on the child */
+      background: #141414;
+      border-radius: 1.5rem;
+      height: 100%;
+    }
+    @keyframes gradient‑move {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Make sure VanillaTilt can do its magic */
+    .tilt {
+      transform-style: preserve-3d;
+      will-change: transform;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen p-6">
+  <div class="max-w-5xl mx-auto space-y-8">
+    <!-- Header -->
+    <header class="flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-semibold tracking-tight">Tesla Model 3</h1>
+        <p class="text-gray-400 mt-1">Connected • Last updated 2 minutes ago</p>
+      </div>
+      <div
+        class="bg-gray-800 px-4 py-2 rounded-full text-sm border border-gray-700 tilt gradient-border"
+      >
+        <div class="inner-card flex items-center justify-center px-6 py-2">
+          Parked • Home
+        </div>
+      </div>
+    </header>
+
+    <!-- Top row: Battery & Status -->
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Battery Card -->
+      <div
+        class="tilt gradient-border hover:shadow-2xl transition-shadow duration-500"
+      >
+        <div class="inner-card p-8 border border-gray-700 rounded-3xl space-y-6 transform transition-colors duration-300 hover:bg-gray-900">
+          <div>
+            <p class="text-gray-400 text-sm">Battery Status</p>
+            <div class="flex items-end gap-2">
+              <span class="text-6xl font-medium">76</span>
+              <span class="text-xl text-gray-400 mb-1">%</span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-teal-400 rounded-full"
+                style="width: 76%;"
+              ></div>
+            </div>
+            <div class="flex justify-between text-gray-400 text-xs">
+              <span>267 miles range</span>
+              <span>Full charge: 3h 15m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Card -->
+      <div
+        class="tilt gradient-border hover:shadow-2xl transition-shadow duration-500"
+      >
+        <div class="inner-card p-8 border border-gray-700 rounded-3xl space-y-6 transform transition-colors duration-300 hover:bg-gray-900">
+          <div class="flex justify-between">
+            <!-- Speed -->
+            <div>
+              <p class="text-gray-400 text-sm">Current Speed</p>
+              <div class="flex items-end gap-2">
+                <span class="text-6xl font-medium">65</span>
+                <span class="text-xl text-gray-400 mb-1">mph</span>
+              </div>
+            </div>
+            <!-- Cabin Temp -->
+            <div>
+              <p class="text-gray-400 text-sm">Cabin</p>
+              <div class="flex items-end gap-2">
+                <span class="text-6xl font-medium">72</span>
+                <span class="text-xl text-gray-400 mb-1">°F</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm text-gray-400">
+            <div>Eco mode: <span class="text-white">Active</span></div>
+            <div>A/C: <span class="text-white">On</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom row: Trips, Gauge, Tires -->
+    <div class="grid grid-cols-3 gap-6">
+      <!-- Trip Info -->
+      <div
+        class="tilt gradient-border hover:shadow-2xl transition-shadow duration-500"
+      >
+        <div class="inner-card p-8 border border-gray-700 rounded-3xl space-y-6 transform transition-colors duration-300 hover:bg-gray-900">
+          <p class="text-gray-400 text-sm">Trip Information</p>
+          <div class="space-y-6">
+            <div>
+              <p class="text-gray-400 text-xs">Distance</p>
+              <p class="text-2xl font-medium">42.5 mi</p>
+            </div>
+            <div>
+              <p class="text-gray-400 text-xs">Duration</p>
+              <p class="text-2xl font-medium">1h 12m</p>
+            </div>
+            <div>
+              <p class="text-gray-400 text-xs">Efficiency</p>
+              <p class="text-2xl font-medium">4.1 mi/kWh</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speed Gauge -->
+      <div
+        class="tilt gradient-border hover:shadow-2xl transition-shadow duration-500 flex items-center justify-center"
+      >
+        <div class="inner-card p-8 border border-gray-700 rounded-3xl transform transition-colors duration-300 hover:bg-gray-900">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <circle
+              cx="80"
+              cy="80"
+              r="70"
+              fill="none"
+              stroke="#1c1c1c"
+              stroke-width="12"
+            />
+            <circle
+              cx="80"
+              cy="80"
+              r="70"
+              fill="none"
+              stroke="#2dd4bf"
+              stroke-width="12"
+              stroke-dasharray="314"
+              stroke-dashoffset="78.5"
+              class="gauge-ring"
+            />
+            <text
+              x="80"
+              y="75"
+              text-anchor="middle"
+              font-size="32"
+              font-weight="500"
+              fill="#fff"
+            >
+              65
+            </text>
+            <text
+              x="80"
+              y="95"
+              text-anchor="middle"
+              font-size="14"
+              fill="#8a8a8a"
+            >
+              mph
+            </text>
+          </svg>
+          <p class="text-gray-400 text-sm mt-4">Speed Limit: 70 mph</p>
+        </div>
+      </div>
+
+      <!-- Tire Pressures -->
+      <div
+        class="tilt gradient-border hover:shadow-2xl transition-shadow duration-500"
+      >
+        <div class="inner-card p-8 border border-gray-700 rounded-3xl space-y-6 transform transition-colors duration-300 hover:bg-gray-900">
+          <p class="text-gray-400 text-sm">Tire Pressure (psi)</p>
+          <div class="grid grid-cols-2 gap-6 mt-4">
+            <div class="text-center">
+              <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800 mb-2"
+              >
+                <span class="text-xl font-medium">36</span>
+              </div>
+              <p class="text-xs text-gray-400">Front Left</p>
+            </div>
+            <div class="text-center">
+              <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800 mb-2"
+              >
+                <span class="text-xl font-medium">36</span>
+              </div>
+              <p class="text-xs text-gray-400">Front Right</p>
+            </div>
+            <div class="text-center">
+              <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800 mb-2"
+              >
+                <span class="text-xl font-medium">35</span>
+              </div>
+              <p class="text-xs text-gray-400">Rear Left</p>
+            </div>
+            <div class="text-center">
+              <div
+                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800 mb-2"
+              >
+                <span class="text-xl font-medium">35</span>
+              </div>
+              <p class="text-xs text-gray-400">Rear Right</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VanillaTilt.js for 3D Tilt Effect -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+  <script>
+    // Initialize tilt on all elements with the .tilt class
+    VanillaTilt.init(document.querySelectorAll('.tilt'), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.2,
+      scale: 1.02
+    });
+  </script>
+</body>
+</html>
